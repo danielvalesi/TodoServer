@@ -27,7 +27,7 @@ app.get('/api/todo', function(request, response) {
 app.get('/api/todo/:id', function(request, response) {
 
 	for (var i = 0; i < tarefas.legth; i++) {
-		if (tarefas[i].id == request.param.id) {
+		if (tarefas[i].id == request.params.id) {
 			return response.json(tarefas[i]);
 		}
 	}
@@ -55,14 +55,33 @@ app.post('/api/todo', function(request, response) {
 
 // PUT (UPDATE)
 app.put('/api/todo', function(request, response) {
-	response.json(cliente);
+	var tarefa = request.body;
+
+	for (var i = 0; i < tarefas.legth; i++)
+	{
+		if (tarefas[i].id == tarefa.id) {
+			taefas[i].texto = tarefa.texto;
+			taefas[i].concluida = tarefa.concluida;
+
+			return response.send(200);
+		}
+	}
+
+
 });
 
 
 
 // DELETE (DELETE)
-app.delete('/api/todo', function(request, response) {
-	response.json(cliente);
+app.delete('/api/todo/:id', function(request, response) {
+
+	for (var i = 0; i < tarefas.legth; i++) {
+		if (tarefas[i].id == request.params.id) {
+			tarefas.splice(i, 1);
+			response.send(200);
+		}
+	}
+
 });
 
 
