@@ -23,6 +23,17 @@ app.get('/api/todo', function(request, response) {
 	response.json(tarefas);
 });
 
+// GET (READ)
+app.get('/api/todo/:id', function(request, response) {
+
+	for (var i = 0; i < tarefas.legth; i++) {
+		if (tarefas[i].id == request.param.id) {
+			return response.json(tarefas[i]);
+		}
+	}
+
+});
+
 
 
 // POST (CREATE)
